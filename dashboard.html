@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Band 6.5 Preparation - Progress Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #e4e4e4;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            color: #00d9ff;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 1rem;
+        }
+        
+        .target-badge {
+            display: inline-block;
+            background: #00d9ff;
+            color: #1a1a2e;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-full {
+            grid-column: 1 / -1;
+        }
+        
+        .card h2 {
+            color: #00d9ff;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .skill-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .score-label {
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .progress-low { background: linear-gradient(90deg, #ff4444, #ff8800); width: 55%; }
+        .progress-mid { background: linear-gradient(90deg, #ffaa00, #ffdd00); width: 65%; }
+        .progress-good { background: linear-gradient(90deg, #00d9ff, #00ff88); width: 75%; }
+        
+        .priority-tag {
+            background: #ff4444;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-left: auto;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #00d9ff, #00a8cc);
+            color: #1a1a2e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .schedule-table th,
+        .schedule-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .schedule-table th {
+            color: #00d9ff;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .log-entry {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .log-date {
+            color: #00d9ff;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        
+        .log-activity {
+            flex-grow: 1;
+            margin: 0 15px;
+            font-size: 0.9rem;
+        }
+        
+        .log-score {
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        .log-empty {
+            color: #666;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .focus-area {
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 3px solid #ff4444;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IELTS Band 6.5 Preparation</h1>
+            <p class="subtitle">Your progress dashboard</p>
+            <span class="target-badge">Target: Band 6.5 | Timeline: 1-2 Months</span>
+        </header>
+        
+        <!-- Current Scores -->
+        <div class="grid">
+            <div class="card">
+                <h2>📖 Reading</h2>
+                <div class="skill-score">6.5</div>
+                <div class="score-label">Good comprehension</div>
+                <div class="progress-bar"><div class="progress-fill progress-good"></div></div>
+            </div>
+            
+            <div class="card">
+                <h2>🎧 Listening</h2>
+                <div class="skill-score">6.5</div>
+                <div class="score-label">Good understanding</div>
+                <div class="progress-bar"><div class="progress-fill progress-good"></div></div>
+            </div>
+            
+            <div class="card">
+                <h2>✍️ Writing Task 1</h2>
+                <div class="skill-score" style="color: #ffaa00;">5.0</div>
+                <div class="score-label">Needs improvement</div>
+                <div class="progress-bar"><div class="progress-fill progress-low"></div></div>
+            </div>
+            
+            <div class="card">
+                <h2>✍️ Writing Task 2</h2>
+                <div class="skill-score" style="color: #ffdd00;">6.0</div>
+                <div class="score-label">Good word count</div>
+                <div class="progress-bar"><div class="progress-fill progress-mid"></div></div>
+            </div>
+            
+            <div class="card">
+                <h2>🗣️ Speaking <span class="priority-tag">PRIORITY</span></h2>
+                <div class="skill-score" style="color: #ff4444;">5.5</div>
+                <div class="score-label">Needs most work</div>
+                <div class="progress-bar"><div class="progress-fill progress-low"></div></div>
+            </div>
+        </div>
+        
+<!-- Focus Area -->
+        <div class="card card-full">
+            <h2>🎯 Current Focus Areas</h2>
+            <div class="focus-area">
+                <strong>Writing Task 1:</strong> Word count (needs 150+), 4 paragraphs, linking words
+            </div>
+            <div class="focus-area">
+                <strong>Writing Task 2:</strong> Word count (needs 250+), vocabulary, specific examples
+            </div>
+            <div class="focus-area">
+                <strong>Speaking:</strong> Extend answers to 2+ minutes, reduce filler words
+            </div>
+        </div>
+        
+        <!-- Band 7 Writing Tips -->
+        <div class="card card-full">
+            <h2>📝 Writing Tips for Band 7</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 12px; border-radius: 8px;">
+                    <strong style="color: #00d9ff;">1. Vocabulary</strong>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #ccc;">Use specific names: "FAANG companies" instead of "big companies". Add numbers: "$150,000+" instead of "high salary".</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 12px; border-radius: 8px;">
+                    <strong style="color: #00d9ff;">2. Examples</strong>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #ccc;">Replace vague examples with data-driven ones. Use: names, statistics, years, specific companies.</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 12px; border-radius: 8px;">
+                    <strong style="color: #00d9ff;">3. Linking Words</strong>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #ccc;">Upgrade: "However" → "Nevertheless", "Also" → "Furthermore", "So" → "Therefore"</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 12px; border-radius: 8px;">
+                    <strong style="color: #00d9ff;">4. Grammar</strong>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #ccc;">Use complex sentences: "Students who develop specialized expertise... enjoy higher rates"</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 12px; border-radius: 8px;">
+                    <strong style="color: #00d9ff;">5. No Personal Anecdotes</strong>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #ccc;">IELTS Writing is formal. Remove "my case", "I experienced". Use universal examples instead.</p>
+                </div>
+                <div style="background: rgba(0, 217, 255, 0.1); padding: 12px; border-radius: 8px;">
+                    <strong style="color: #00d9ff;">6. Opinion Justification</strong>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: #ccc;">State your position clearly + explain WHY with 2-3 supporting sentences.</p>
+                </div>
+            </div>
+        </div>
+            <div class="focus-area">
+                <strong>Writing Task 2:</strong> Word count (needs 250+), grammar accuracy
+            </div>
+            <div class="focus-area">
+                <strong>Speaking:</strong> Extend answers to 2+ minutes, reduce filler words
+            </div>
+            <div class="focus-area" style="border-left-color: #00d9ff; background: rgba(0, 217, 255, 0.1);">
+                <strong>Band 7 Writing Tips:</strong>
+                <ul style="margin: 8px 0 0 15px; font-size: 0.85rem; line-height: 1.6;">
+                    <li><strong>Vocabulary:</strong> Use specific names (Google, Meta) + data ($120,000) instead of vague terms</li>
+                    <li><strong>Examples:</strong> Add numbers, years, statistics to support your points</li>
+                    <li><strong>Linking:</strong> Upgrade: However → Nevertheless, Also → Furthermore, So → Consequently</li>
+                    <li><strong>Grammar:</strong> Use complex sentences: "Students who develop specialized expertise enjoy higher employment"</li>
+                    <li><strong>No personal anecdotes:</strong> Use universal examples, not "my experience"</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Weekly Schedule -->
+        <div class="card card-full">
+            <h2>📅 This Week's Practice</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Skill</th>
+                        <th>Practice</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Mon</td><td>Writing Task 1</td><td>Bar Chart prompt</td></tr>
+                    <tr><td>Tue</td><td>Speaking Part 2</td><td>Cue card practice</td></tr>
+                    <tr><td>Wed</td><td>Writing Task 2</td><td>Essay prompt</td></tr>
+                    <tr><td>Thu</td><td>Listening</td><td>Hotel conversation</td></tr>
+                    <tr><td>Fri</td><td>Writing</td><td>Review prompts</td></tr>
+                    <tr><td>Sat</td><td>Speaking</td><td>Part 1 topics</td></tr>
+                    <tr><td>Sun</td><td>Review</td><td>Weekly progress</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Practice Log -->
+        <div class="card card-full">
+            <h2>📓 Practice Log by Skill</h2>
+            <div id="practiceLog">
+                <div class="log-empty">No practice recorded yet. Start practicing!</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Progress updates automatically | Check quiz/ folder for practice files</p>
+        </footer>
+    </div>
+    
+<script>
+        // Practice log data - categorize by skill type
+        const practiceLog = {
+            'writing_task1': [
+                { date: '2026-04-25', activity: 'Bar Chart - Sports by Age', score: '5.0', notes: 'Word count 135, no paragraphs' },
+                { date: '2026-04-25', activity: 'Line Graph - Transport', score: '5.5', notes: 'Better linking words' },
+                { date: '2026-04-26', activity: 'Pie Chart - Study Reasons', score: '5.0', notes: 'Word count ~95' },
+                { date: '2026-04-26', activity: 'Process Diagram - Chocolate', score: '5.0', notes: 'Word count ~80' }
+            ],
+            'writing_task2': [
+                { date: '2026-05-06', activity: 'Discussion - University subjects', score: '6.0', notes: 'Word count good (~298)' },
+                { date: '2026-05-09', activity: 'Opinion - Competition vs Cooperation', score: '6.0', notes: 'Word count ~280, informal conclusion' }
+            ],
+            'speaking': [],
+            'listening': [],
+            'reading': [],
+            'grammar': [],
+            'vocabulary': []
+        };
+        
+        const skillColors = {
+            'writing_task1': { bg: '#ffdd0033', color: '#ffdd00', label: 'Writing Task 1' },
+            'writing_task2': { bg: '#ffaa0033', color: '#ffaa00', label: 'Writing Task 2' },
+            'speaking': { bg: '#ff444433', color: '#ff4444', label: 'Speaking' },
+            'listening': { bg: '#00ff8833', color: '#00ff88', label: 'Listening' },
+            'reading': { bg: '#ffaa0033', color: '#ffaa00', label: 'Reading' },
+            'grammar': { bg: '#00d9ff33', color: '#00d9ff', label: 'Grammar' },
+            'vocabulary': { bg: '#aa55ff33', color: '#aa55ff', label: 'Vocabulary' }
+        };
+        
+        function renderLog() {
+            const container = document.getElementById('practiceLog');
+            let html = '';
+            
+            // Render each skill category
+            for (const [skill, entries] of Object.entries(practiceLog)) {
+                if (entries.length === 0) continue;
+                
+                const style = skillColors[skill];
+                html += `<div style="margin-bottom: 20px;">
+                    <h3 style="color: ${style.color}; font-size: 0.95rem; margin-bottom: 8px;">${style.label}</h3>`;
+                
+                // Show latest 3 entries per skill
+                entries.slice().reverse().slice(0, 3).forEach(log => {
+                    html += `<div class="log-entry">
+                        <span class="log-date">${log.date}</span>
+                        <span class="log-activity">${log.activity}</span>
+                        <span class="log-score" style="background: ${style.bg}; color: ${style.color}">Band ${log.score}</span>
+                    </div>`;
+                });
+                
+                html += '</div>';
+            }
+            
+            if (!html) {
+                container.innerHTML = '<div class="log-empty">No practice recorded yet. Start practicing!</div>';
+            } else {
+                container.innerHTML = html;
+            }
+        }
+        
+        // Call this to add practice
+        function addPractice(skill, activity, score, notes = '') {
+            const today = new Date().toISOString().split('T')[0];
+            if (!practiceLog[skill]) skill = 'writing_task1'; // default
+            
+            practiceLog[skill].push({ date: today, activity: activity, score: score, notes: notes });
+            renderLog();
+            alert(`Practice logged: ${skill} - ${activity} (Band ${score})`);
+        }
+        
+        renderLog();
+    </script>
+</body>
+</html>
