@@ -74,6 +74,7 @@ IELTS_Preparation/
 | 2026-04-26 | Writing Task 1 | Process Diagram - Chocolate | 5.0 | Word count ~80 (needs 150+), no paragraphs |
 | 2026-05-06 | Writing Task 2 | Discussion - University subjects | 6.0 | Word count good (~298), grammar errors |
 | 2026-05-09 | Writing Task 2 | Opinion - Competition vs Cooperation | 6.0 | Word count good (~280), personal anecdote needs removal |
+| 2026-05-16 | Writing Task 2 | Problem-Solution - Crime | 6.0 | Word count ~410+, good structure, some grammar errors |
 
 ### Speaking Practice
 
