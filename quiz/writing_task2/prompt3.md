@@ -66,6 +66,12 @@ In conclusion, the increase in crime is largely driven by number of population t
 - Some grammar errors to fix
 - Clear causes and solutions presented
 
+**Remaining issues to work on:**
+- Grammar: "population in increased" → "population has increased"
+- Spelling: "compeed" → "competed", "geeting" → "getting", "goverment" → "government"
+- "violation cases is raising" → "crime rates are rising"
+
+Your score remains at 6.0 (same as your previous Task 2 essays) - keep practicing to reach 6.5!
 ---
 
 ## Example Essays
@@ -79,6 +85,18 @@ The primary cause of rising crime is unemployment and economic inequality. When 
 To address these issues, governments should invest in education and job training programs. By providing vocational training and skills development, unemployed individuals can gain the qualifications needed to secure well-paying jobs. Additionally, governments can create more employment opportunities by attracting foreign investment and supporting small businesses. When people have stable incomes, they are less likely to engage in criminal activities.
 
 In conclusion, the increase in crime is largely driven by unemployment and economic inequality. By investing in education and creating more job opportunities, governments can effectively reduce crime rates and create a more stable society.
+
+
+
+### Band 7.0 Example (Recommended - ~275 words)
+
+It is widely accepted that crime rates are increasing in many societies around the world. This essay will explore the main causes of this issue and propose effective solutions to reduce criminal activity.
+
+The primary cause of rising crime is socioeconomic inequality, particularly unemployment and poverty. When individuals cannot secure stable employment, they may resort to illegal activities to support themselves and their families. For instance, in many developing nations, young people with university degrees cannot find suitable jobs, leading some to turn to theft or fraud. Additionally, the widening gap between the rich and poor creates feelings of resentment and desperation among disadvantaged communities, which can fuel criminal behaviour.
+
+To address these problems, governments should prioritise investment in education and job creation. By providing vocational training and skills development programmes, unemployed individuals can gain the qualifications needed to secure well-paying jobs. Furthermore, attracting foreign investment and supporting small businesses can create more employment opportunities. When people have stable incomes and access to social support, they are less likely to engage in criminal activities.
+
+In conclusion, the increase in crime is largely driven by socioeconomic factors such as unemployment and inequality. By investing in education, creating jobs, and strengthening social welfare systems, governments can effectively tackle the root causes of crime and build safer, more stable societies.
 
 
 
